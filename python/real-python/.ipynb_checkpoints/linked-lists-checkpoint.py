@@ -41,4 +41,3 @@ class LinkedList:
     def add_first(self, node: Node):
         node.next = self.head
         self.head = node
-
