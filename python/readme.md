@@ -1,14 +1,13 @@
 # Prerequisites
-- python 3.8.7 and `virtualenv`
-  - `pip install virtualenv`
+- conda >= 4.9.x
 
 # Set up
 - Create your virtual environment.
-  - `python -m virtualenv --prompt '(tourmaline-content) ' ./venv/main`
+  - `conda env create -f environment.yml`
 - Activate your virtual environment.
-  - `source ./venv/main/bin/activate`
+  - `conda activate brilliant`
 - Install project dependencies (from active virtual environment).
-  - `pip install -r ./requirements.txt`
+  - `conda install --file requirements.txt`
 
 # Updating dependencies
-- `pip freeze > requirements.txt`
+- `conda list -e > requiremetns.txt`
