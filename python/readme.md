@@ -10,4 +10,4 @@
   - `conda install --file requirements.txt`
 
 # Updating dependencies
-- `conda list -e > requiremetns.txt`
+- `conda list -e > requirements.txt`
