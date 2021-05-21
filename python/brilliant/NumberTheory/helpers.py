@@ -1,8 +1,5 @@
 import numpy as np
 
-msg = "abc"
-
-# print msg
 
 def points_count(d, j):
     return d/(np.gcd(d, j))
