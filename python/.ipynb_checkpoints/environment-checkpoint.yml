@@ -1,4 +1,0 @@
-name: brilliant
-channels:
-  - conda-forge
-  - defaults
