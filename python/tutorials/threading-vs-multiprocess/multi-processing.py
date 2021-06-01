@@ -6,7 +6,7 @@ import time
 def square_numbers():
     for i in range(100):
         i * i
-        time.sleep(1)
+        time.sleep(0.1)
 
 
 processes = []
