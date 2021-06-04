@@ -1,6 +1,8 @@
 {
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
-    "python.linting.pylintUseMinimalCheckers": false,
-    "jupyter.jupyterServerType": "local"
+    "python.linting.pylintEnabled": false,
+    "python.pythonPath": "/opt/anaconda3/envs/brilliant/bin/python",
+    "python.analysis.extraPaths": [
+        "/opt/anaconda3/envs/brilliant/lib/python3.7",
+        "/opt/anaconda3/envs/brilliant/lib/python3.7/site-packages/"
+    ]
 }
