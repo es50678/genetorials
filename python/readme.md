@@ -7,7 +7,7 @@
 - Activate your virtual environment.
   - `conda activate brilliant`
 - Install project dependencies (from active virtual environment).
-  - `conda install --file requirements.txt`
+  - `conda install --file conda-reqs.txt`
 
 # Updating dependencies
-- `conda list -e > requirements.txt`
+- `conda list -e > conda-reqs.txt`
