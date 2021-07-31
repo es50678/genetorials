@@ -1,4 +1,3 @@
 {
-    "python.linting.pylintEnabled": false,
-    "python.pythonPath": "/opt/anaconda3/envs/brilliant/bin/python"
+    "python.linting.pylintEnabled": false
 }
