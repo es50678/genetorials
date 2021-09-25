@@ -1,5 +1,6 @@
 package iteration
 
+// Repeat repeats the provided character, char, amt times.
 func Repeat(char string, amt int) string {
 	var repeated string
 
