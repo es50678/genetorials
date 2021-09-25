@@ -24,10 +24,6 @@ func ExampleRepeat() {
 	sum := Repeat("a", 10)
 	fmt.Println(sum)
 	// Output: aaaaaaaaaa
-
-	sum = Repeat("a", 11)
-	fmt.Println(sum)
-	// Output: aaaaaaaaaaa
 }
 
 func ExampleRepeat_two() {
