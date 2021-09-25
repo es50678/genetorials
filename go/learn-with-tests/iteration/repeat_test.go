@@ -30,7 +30,7 @@ func ExampleRepeat() {
 	// Output: aaaaaaaaaaa
 }
 
-func ExampleRepeat_2() {
+func ExampleRepeat_two() {
 	sum := Repeat("a", 11)
 	fmt.Println(sum)
 	// Output: aaaaaaaaaaa
