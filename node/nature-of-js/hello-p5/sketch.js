@@ -1,15 +1,31 @@
 let walker;
+let total = 20;
+let randomCounts = Array.from({ length: total }, (v, i) => 0);
 
 function setup() {
-  createCanvas(400, 400);
-  background(220);
+  createCanvas(420, 690);
+  background('#2d549c');
   walker = new Walker(); // Create a new Walker object
 }
 
 function draw() {
-   // Call the step method on the walker object
-  walker.step(walker.stepRealNumbers.bind(walker));
+  // Call the step method on the walker object
+  walker.step();
   walker.show(); // Call the show method to display the walker
+  // drawBars();
+}
+
+function drawBars() {
+  let index = floor(random(randomCounts.length));
+  randomCounts[index]++;
+
+  stroke(0);
+  fill(175);
+  let w = width / randomCounts.length;
+
+  for (let x = 0; x < randomCounts.length; x++) {
+    rect(x * w, height - randomCounts[x], w - 1, randomCounts[x]);
+  }
 }
 
 class Walker {
@@ -22,7 +38,7 @@ class Walker {
 
   // Objects have methods.
   show() {
-    stroke(0);
+    stroke(255);
     point(this.x, this.y);
     console.debug(`Walker is at (${this.x}, ${this.y})`);
   }
@@ -37,18 +53,23 @@ class Walker {
       fn();
       return;
     }
+    let xstep = random(-2.75, 3);
+    let ystep = random(-2.75, 3);
+    this.x += xstep;
+    this.y += ystep;
+
 
     //{!1} 0, 1, 2, or 3. The random choice determines the step.
-    let choice = floor(random(4));
-    if (choice === 0) {
-      this.x++;
-    } else if (choice === 1) {
-      this.x--;
-    } else if (choice === 2) {
-      this.y++;
-    } else {
-      this.y--;
-    }
+    // let choice = floor(random(4));
+    // if (choice === 0) {
+    //   this.x++;
+    // } else if (choice === 1) {
+    //   this.x--;
+    // } else if (choice === 2) {
+    //   this.y++;
+    // } else {
+    //   this.y--;
+    // }
   }
 
   stepEightWays() {
