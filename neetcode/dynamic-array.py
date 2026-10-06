@@ -2,7 +2,8 @@ class DynamicArray:
     
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.data = []
+        self.length = 0
+        self.data = [None] * capacity
 
 
     def get(self, i: int) -> int:
@@ -14,21 +15,27 @@ class DynamicArray:
 
 
     def pushback(self, n: int) -> None:
-        self.data.append(n)
-        if len(self.data) > self.capacity:
+        if self.length >= self.capacity:
             self.resize()
+        self.data[self.length] = n
+        self.length += 1
 
 
     def popback(self) -> int:
-        return self.data.pop()
+        self.length -= 1
+        return self.data[self.length]
  
 
     def resize(self) -> None:
         self.capacity = self.capacity * 2
+        new_data = [0] * self.capacity
+        for i in range(self.length):
+            new_data[i] = self.data[i]
+        self.data = new_data
 
 
     def getSize(self) -> int:
-        return len(self.data)
+        return self.length
         
     
     def getCapacity(self) -> int:

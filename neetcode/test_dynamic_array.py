@@ -1,10 +1,10 @@
+import ast
 import importlib.util
 import pathlib
 import unittest
 
-_spec = importlib.util.spec_from_file_location(
-    "dynamic_array", pathlib.Path(__file__).parent / "dynamic-array.py"
-)
+_source_path = pathlib.Path(__file__).parent / "dynamic-array.py"
+_spec = importlib.util.spec_from_file_location("dynamic_array", _source_path)
 _module = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_module)
 DynamicArray = _module.DynamicArray
@@ -169,6 +169,57 @@ class TestNeetCodeExamples(unittest.TestCase):
         self.assertEqual(arr.popback(), 3)
         self.assertEqual(arr.getSize(), 1)
         self.assertEqual(arr.getCapacity(), 2)
+
+
+def _storage(arr):
+    lists = [v for v in vars(arr).values() if isinstance(v, list)]
+    if len(lists) != 1:
+        raise AssertionError(
+            f"expected exactly one list attribute as backing storage, found {len(lists)}"
+        )
+    return lists[0]
+
+
+class TestFixedStorage(unittest.TestCase):
+    def test_storage_is_allocated_to_capacity_up_front(self):
+        arr = DynamicArray(4)
+        self.assertEqual(len(_storage(arr)), 4)
+
+    def test_storage_length_matches_capacity_after_growth(self):
+        arr = DynamicArray(2)
+        for n in range(5):
+            arr.pushback(n)
+        self.assertEqual(len(_storage(arr)), arr.getCapacity())
+
+    def test_resize_allocates_new_storage(self):
+        arr = DynamicArray(2)
+        arr.pushback(1)
+        before = _storage(arr)
+        arr.resize()
+        after = _storage(arr)
+        self.assertIsNot(after, before)
+        self.assertEqual(len(after), 4)
+
+    def test_popback_does_not_shrink_storage(self):
+        arr = DynamicArray(4)
+        for n in [1, 2, 3]:
+            arr.pushback(n)
+        arr.popback()
+        self.assertEqual(len(_storage(arr)), 4)
+
+    def test_does_not_use_growable_list_methods(self):
+        banned = {"append", "extend", "insert", "pop", "remove", "clear"}
+        tree = ast.parse(_source_path.read_text())
+        used = sorted(
+            {
+                node.func.attr
+                for node in ast.walk(tree)
+                if isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Attribute)
+                and node.func.attr in banned
+            }
+        )
+        self.assertEqual(used, [], f"list methods that grow or shrink the list: {used}")
 
 
 if __name__ == "__main__":
